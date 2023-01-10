@@ -1,8 +1,9 @@
 ## 평균은 넘겠지
+import sys
 N = int(input())
 
 for _ in range(N) :
-    inputs = list(map(int, input().split())) # sys.stdin.readline().rstrip().split()
+    inputs = list(map(int, sys.stdin.readline().rstrip().split() )) # 
     num_students, scores = inputs[0], inputs[1:]
     mean_score = sum(scores) / num_students
     cnt = 0
