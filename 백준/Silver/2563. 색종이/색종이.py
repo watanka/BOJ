@@ -15,7 +15,7 @@ for _ in range(N) :
     y1 = min(y0 + 10, 99)
     for col in range(y0, y1) :
         for row in range(x0, x1) :
-            if board[col][row] == 0 :
-                board[col][row] = 1
+            if board[100 - col - 1][row] == 0 :
+                board[100 - col - 1][row] = 1
                 area += 1
 print(area)
