@@ -7,23 +7,19 @@ for _ in range(9) :
 heights.sort()
 total_heights = sum(heights)
 
-exclude = []
-for i in range(8) :
-    for j in range(i+1, 9) :
+class Found(Exception) : pass
 
-        if total_heights - heights[i] - heights[j] == 100 :
-            exclude.append(heights[i])
-            exclude.append(heights[j])
-            break
+try : 
+    for i in range(8) :
+        for j in range(i+1, 9) :
 
-    if len(exclude) == 2 :
-        break
+            if total_heights - heights[i] - heights[j] == 100 :
+                raise Found
 
+except Found :
 
-
-
-
-
-for h in heights :
-    if h not in exclude :
-        print(h)
+    for idx in range(9) :
+        if idx == i or idx == j :
+            pass
+        else :
+            print(heights[idx])
