@@ -9,9 +9,9 @@ for _ in range(N) :
     parent, left, right = map(int, input().split())
     tree[parent] = [left, right]
     if left != -1 :
-        r_list[left] += 1
+        r_list[left] = 1
     if right != -1 :
-        r_list[right] += 1
+        r_list[right] = 1
 
 for i in range(1, N+1) :
     if r_list[i] == 0 :
