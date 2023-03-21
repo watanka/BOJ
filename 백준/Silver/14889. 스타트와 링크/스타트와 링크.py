@@ -1,41 +1,38 @@
 ## 스타트와 링크
+import sys
 
 N = int(input())
-S = [list(map(int, input().split())) for _ in range(N)]
+stats = []
+for _ in range(N) :
+    stats.append(list(map(int, input().split())))
 
-# 능력치 계산
-def calc_stat(ls) :
-    stats = 0
-    for i in ls :
-        for j in ls :
-            if i != j :
-                stats += S[i][j]
-    return stats
+min_diff = sys.maxsize
+
+def calculate_diff() :
+    start_score = 0
+    link_score = 0
+    for j in range(N) :
+        for i in range(N) :
+            if visited[i] and visited[j] :
+                start_score += stats[i][j]
+            elif not visited[i] and not visited[j] :
+                link_score += stats[i][j]
+    return abs(start_score - link_score)
 
 
-# 팀 조합
 
 visited = [0 for _ in range(N)]
-min_cost = 380*100 // 2 + 1
-def dfs(start, depth) :
-    global min_cost
-    if depth  == N//2 :
-        stat1, stat2 = 0, 0
-        for i in range(N) :
-            for j in range(N) :
-                if visited[i] and visited[j] :
-                    stat1 += S[i][j]
-                elif not visited[i] and not visited[j] :
-                    stat2 += S[i][j]
-        # print(*stack, abs(stat1-stat2))
-        min_cost = min(min_cost, abs(stat1 - stat2))
+def dfs(depth, start) :
+    global min_diff
+    if depth == N//2 :
+        min_diff = min(min_diff, calculate_diff())
         return
 
     for i in range(start, N) :
-        if not visited[i] :           
+        if not visited[i] :
             visited[i] = 1
-            dfs(i, depth + 1 )
+            dfs(depth+1, i)
             visited[i] = 0
 
 dfs(0, 0)
-print(min_cost)
+print(min_diff)
