@@ -8,7 +8,7 @@
 
 ### 분류
 
-백트래킹(backtracking), 조합론(combinatorics), 수학(math), 재귀(recursion)
+수학, 조합론, 백트래킹, 재귀
 
 ### 문제 설명
 
