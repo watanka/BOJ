@@ -1,6 +1,4 @@
 def solution(priorities, location):
-    
-    popval = 0
     indices = [i for i in range(len(priorities))]
     result = []
     while priorities :
@@ -14,8 +12,27 @@ def solution(priorities, location):
         
     
     return result.index(location) + 1
-            
+    
+#     p_order = list(sorted(priorities, reverse = True))
+#     indices = [i for i in range(len(priorities))]
+    
+#     num_place = 1
+#     while priorities :
+#         p = priorities.pop(0)
+#         i = indices.pop(0)
         
+#         if p == p_order[0] : # 뽑는다.
+#             if location == i :
+#                 return num_place
+#             p_order.pop(0)
+#             num_place += 1
+#         else : 
+#             priorities.append(p)
+#             indices.append(i)
+        
+    
+    
+    
         
         
         
