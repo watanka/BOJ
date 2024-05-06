@@ -1,36 +1,36 @@
-## 스택
 import sys
-input = sys.stdin.readline
-N = int(input())
+N = int(sys.stdin.readline())
+
 stack = []
-for _ in range(N) :
-    cmdline = input().split()
-    
-    
-    if len(cmdline) == 2 :
+size = 0
+
+for _ in range(N):
+    cmdline = sys.stdin.readline().split()
+    if len(cmdline) == 2:
         cmd, num = cmdline
         num = int(num)
-    else : 
+    else:
         cmd = cmdline[0]
-    
-    
-    
-    if cmd == 'push' :
-        stack = [num] + stack
-    elif cmd == 'pop' :
-        if len(stack) == 0 :
+
+
+    if cmd == 'push':
+        stack.append(num)
+        size += 1
+    elif cmd == 'pop':
+        if size > 0:
+            print(stack.pop())
+            size -= 1 # size가 1이상일 때만 pop하면 size 감소
+        else:
             print(-1)
-        else :
-            print(stack.pop(0))
-    elif cmd == 'size' :
-        print(len(stack))
-    elif cmd == 'empty' :
-        if len(stack) == 0 :
-            print(1)
-        else :
-            print(0)
-    elif cmd == 'top' :
-        if len(stack) == 0 :
+        
+    elif cmd == 'size':
+        print(size)
+    elif cmd == 'empty':
+        print(0 if size > 0 else 1)
+    elif cmd == 'top':
+        if size > 0:
+            print(stack[-1])
+        else:
             print(-1)
-        else :
-            print(stack[0])
+    else:
+        raise ValueError
