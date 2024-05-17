@@ -1,49 +1,38 @@
-## 숨바꼭질
-import sys
+'''
+백준 1697번 : Hide and Seek
+'''
 from collections import deque
 
-sys.setrecursionlimit(100000)
 N, K = map(int, input().split())
 
+if N >= K:
+    print(N - K)
+    exit()
 
-visited = [0 for _ in range(100001)]
+time = [-1 for _ in range(K*2)]
+visited = [0 for _ in range(K*2)]
 
-if N == K :
-    print(0)
-    sys.exit()
-if N > K :
-    print(N-K)
-    sys.exit()
-else :
-    min_pt, max_pt = [0,  100000]
-
-def bfs(x) :
-    queue = deque([x])
+def bfs(x):
+    cnt = 0
+    time[x] = cnt
     visited[x] = 1
+    if x == K:
+        min_cnt = min(min_cnt, cnt)
+        return
+    if x > K:
+        min_cnt = min(min_cnt, cnt + (x - K))
+        return
+    queue = deque([x])   
+    
+    while queue:
+        cx = queue.popleft()
+        for new_x in [ cx*2, cx-1, cx+1]:
+            if 0 <= new_x < K*2:
+                if not visited[new_x]:
+                    visited[new_x] = 1
+                    time[new_x] = time[cx] + 1
+                    queue.append(new_x)
 
-    while queue :
-        pos = queue.popleft()
-        
-        if pos == K :
-            return
-
-        if min_pt <= pos + 1 <= max_pt :
-            if not visited[pos+1] :
-                visited[pos+1] = visited[pos] + 1
-                queue.append(pos+1)
-
-        if min_pt <= pos - 1 <= max_pt :
-            if not visited[pos-1] :
-                visited[pos-1] = visited[pos] + 1
-                queue.append(pos-1)
-
-        if min_pt <= pos * 2 <= max_pt :
-            if not visited[pos*2] :
-                visited[pos*2] = visited[pos] + 1
-                queue.append(pos*2)
-
-
-
+    
 bfs(N)
-
-print(visited[K]-1)
+print(time[K])
